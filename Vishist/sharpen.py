@@ -1,6 +1,7 @@
 import cv2
 
 def sharpenImage(multiplier):
+    multiplier=(1.5/100)*multiplier
     image = cv2.imread('sudoku.jpeg')
 
     # Check if the image was loaded successfully
@@ -25,6 +26,5 @@ def sharpenImage(multiplier):
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-# for i in range(1,20):
-    
-sharpenImage(1.5)
+
+sharpenImage(100)

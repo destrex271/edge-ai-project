@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 
 def shiftHue(degrees):
+    degrees=round((degrees/100)*255)
     image = cv2.imread('sudoku.jpeg')
     # Convert the image to HSV color space
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -26,4 +27,4 @@ def shiftHue(degrees):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-shiftHue(180)
+shiftHue()
