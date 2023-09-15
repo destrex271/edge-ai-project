@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import copy
 
+"""
+
 def change_warmth(orig, value):
     image = copy.deepcopy(orig)
     green_param = 0.6
@@ -36,6 +38,8 @@ def change_warmth(orig, value):
     image[:, :, 2] = image_red
     return image
 
+"""
+
 def warmth_change(orig, percent = 0.3):
     image = copy.deepcopy(orig)
     if percent == 0:
@@ -65,10 +69,14 @@ if image is None:
 
 cv2.imshow("Original Image", image)
 
+"""
+
 warm_image = change_warmth(image, value)
 
 cv2.imshow("Warmth changed using absolute value", warm_image)
 cv2.waitKey(0)
+
+"""
 
 warm_image1 = warmth_change(image, percent)
 
