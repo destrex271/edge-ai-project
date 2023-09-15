@@ -27,7 +27,6 @@ def contrast(image, percentage: float=0):
     for i in prange(0, len(image)):
         pixels = image[i]
         for j in prange(0, len(pixels)):
-            # pixel = np.clip((factor * (pixel - 128) + 128, 0, 180)
             pixel = pixels[j]
             pixel = np.clip((factor * (pixel - 128)) + 128, 0, 180)
             result[i][j] = pixel
@@ -37,12 +36,3 @@ def contrast(image, percentage: float=0):
 
 
 
-x = input()
-image = cv2.imread("bg.jpg")
-cv2.imshow("im", image)
-
-# image = saturation(image, float(x))
-image = contrast(image, float(x))
-# image = contrast(image, float(x))
-cv2.imshow("im2", image)
-cv2.waitKey(0)
