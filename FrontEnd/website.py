@@ -1,6 +1,10 @@
 import cv2
 import streamlit as st
 
+# Import the utilities
+# import function detect in ikshan.py
+from Face_Detection.ikshan import detect
+
 st.title("Webcam Live Feed")
 text = ["Start" , "Stop"]
 button_run = st.button('Start')
@@ -26,7 +30,12 @@ while True:
     if running:
         _, frame = camera.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        FRAME_WINDOW.image(frame)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  
+        
+        # calls the detect() function    
+        canvas = detect(gray, frame)   
+        FRAME_WINDOW.image(canvas)
+
     else:
         st.write('Stopped')
         break
