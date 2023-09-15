@@ -52,27 +52,28 @@ def warmth_change(orig, percent = 0.3):
 
     return image
 
-image = cv2.imread("./hello1.jpeg")
-image = cv2.resize(image, (800, 600))
+if __name__ == "__main__":
+    image = cv2.imread("./hello1.jpeg")
+    image = cv2.resize(image, (800, 600))
 
-#Range of percent - [-0.5, 0.5]
-value, percent = 50, 0.4
+    #Range of percent - [-0.5, 0.5]
+    value, percent = 50, 0.4
 
 
-if image is None:
-    print("Image was not loaded successfully!!")
-    exit(0)
+    if image is None:
+        print("Image was not loaded successfully!!")
+        exit(0)
 
-cv2.imshow("Original Image", image)
+    cv2.imshow("Original Image", image)
 
-warm_image = change_warmth(image, value)
+    warm_image = change_warmth(image, value)
 
-cv2.imshow("Warmth changed using absolute value", warm_image)
-cv2.waitKey(0)
+    cv2.imshow("Warmth changed using absolute value", warm_image)
+    cv2.waitKey(0)
 
-warm_image1 = warmth_change(image, percent)
+    warm_image1 = warmth_change(image, percent)
 
-cv2.imshow("Warmth changed using percent", warm_image1)
-cv2.waitKey(0)
+    cv2.imshow("Warmth changed using percent", warm_image1)
+    cv2.waitKey(0)
 
-cv2.destroyAllWindows()
+    cv2.destroyAllWindows()

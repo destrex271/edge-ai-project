@@ -2,8 +2,10 @@ import cv2
 import streamlit as st
 
 # Import the utilities
-# import function detect in ikshan.py
 from Face_Detection.ikshan import detect
+from Rishabh.warmth import warmth_change
+
+# Main template of our website
 
 st.title("Webcam Live Feed")
 text = ["Start" , "Stop"]
@@ -33,7 +35,8 @@ while True:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  
         
         # calls the detect() function    
-        canvas = detect(gray, frame)   
+        canvas = detect(gray, frame)  
+        canvas = warmth_change(frame, warmth/100)
         FRAME_WINDOW.image(canvas)
 
     else:
