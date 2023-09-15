@@ -1,11 +1,11 @@
 import cv2
 import numpy as np
+from numba import jit, prange, uint8, float64, njit, vectorize
 
 
 def saturation(image, percentage: float = 0, increase: bool = True):
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    cv2.imshow("HSV", hsv)
     saturation_channel = hsv[:, :, 1]
     mask = saturation_channel * percentage
 
@@ -17,3 +17,32 @@ def saturation(image, percentage: float = 0, increase: bool = True):
 
     hsv[:, :, 1] = saturation_channel
     return cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+
+
+@njit(parallel=True)
+def contrast(image, percentage: float=0):
+    percentage = 255 * percentage
+    factor = (259 * (percentage + 255))/(255*(259-percentage))
+    result = np.zeros_like(image)
+    for i in prange(0, len(image)):
+        pixels = image[i]
+        for j in prange(0, len(pixels)):
+            # pixel = np.clip((factor * (pixel - 128) + 128, 0, 180)
+            pixel = pixels[j]
+            pixel = np.clip((factor * (pixel - 128)) + 128, 0, 180)
+            result[i][j] = pixel
+            j += 1
+        i += 1
+    return result
+
+
+
+x = input()
+image = cv2.imread("bg.jpg")
+cv2.imshow("im", image)
+
+# image = saturation(image, float(x))
+image = contrast(image, float(x))
+# image = contrast(image, float(x))
+cv2.imshow("im2", image)
+cv2.waitKey(0)
